@@ -1,0 +1,7 @@
+schema: "classroom50/repo-config/v1"
+classroom: "ma2026"
+assignment: "project-idea"
+owner:
+  username: "Mekk13"
+  id: 73481945
+  accepted_at: "2026-10-02T07:11:59Z"
