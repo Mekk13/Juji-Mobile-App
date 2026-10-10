@@ -35,5 +35,5 @@ The changes remain saved even in the case of an app restart, because they get sa
 # Mockups 
 I used figma
 
-![List mockup](List.png) ![Add mockup](Add.png)
+<img src="List.png" width="300"> <img src="Add.png" width="300">
 
