@@ -27,7 +27,7 @@ Move entity
 # 5. When offline
 -> When the device is offline, the user can see and interact with a local copy of the data, and the server updates later.
 - Create: When you add a move offline, the entry is stored in the local DB and the server updates after the device is connected to the internet once more.
-- Read: The list shows entries from the local DB. It will update with any changes that might happen server-wise in the meantime only after it gains access to it again. A note will show up mentioning that the user is offline.
+- Read: The list shows entries from the local DB. It will update with any changes that might happen server-wise in the meantime, after it gains access to it again. A note will show up mentioning that the user is offline.
 - Update: The edit is saved locally and updates the server entry once reconnected. 
 - Delete: The move is deleted locally and when the device reconnects, it is also removed from the server.
 The changes remain saved even in the case of an app restart, because they get saved in a local DB.
