@@ -1,13 +1,16 @@
 package com.example.juji.ui.list
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -17,7 +20,12 @@ fun MoveListScreen(viewModel: MoveListViewModel = viewModel(), modifier: Modifie
 
     LazyColumn(modifier = modifier) {
         items(moves, key = {it.id}){ move ->
-            Text(move.name)
+            Row(verticalAlignment = Alignment.CenterVertically){
+                Text(move.name)
+                Button(onClick = { viewModel.deleteMove(move.id) }){
+                    Text("Delete")
+                }
+            }
         }
     }
 }
