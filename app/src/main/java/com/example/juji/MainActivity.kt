@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.juji.ui.list.MoveListScreen
+import com.example.juji.ui.navigation.JujiNavHost
 import com.example.juji.ui.theme.JujiTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
             JujiTheme {
                 Scaffold(
                     content = { padding ->
-                        MoveListScreen(modifier = Modifier.padding(padding))
+                        JujiNavHost(modifier = Modifier.padding(padding))
                     }
                 )
 

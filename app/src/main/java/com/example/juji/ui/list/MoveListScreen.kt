@@ -1,12 +1,18 @@
 package com.example.juji.ui.list
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import com.example.juji.model.Move
 
 @Composable
@@ -62,25 +69,46 @@ fun ConfirmDeleteDialog(
         }
     )
 }
+
 @Composable
-fun MoveListScreen(viewModel: MoveListViewModel = viewModel(), modifier: Modifier){
+fun AddButton(onClick: () -> Unit, modifier: Modifier = Modifier){
+    FloatingActionButton(
+        onClick = onClick,
+        shape = CircleShape,
+        modifier = modifier
+    ) {
+        Icon(Icons.Filled.Add, "Floating add button")
+    }
+}
+
+@Composable
+fun MoveListScreen(viewModel: MoveListViewModel = viewModel(), onAddClick: () -> Unit, modifier: Modifier = Modifier){
     val moves by viewModel.moves.collectAsStateWithLifecycle()
 
-    val openDeleteDialog = remember { mutableStateOf(false) }
     val selectedMove = remember { mutableStateOf<Move?>(null) }
 
-    LazyColumn(modifier = modifier) {
-        items(moves, key = {it.id}){ move ->
-            Row(verticalAlignment = Alignment.CenterVertically){
-                Text(move.name)
-                Button(onClick = {
-                    openDeleteDialog.value = true
-                    selectedMove.value = move
-                }){
-                    Text("Delete")
+    Box (
+        modifier = modifier.fillMaxSize()
+    ) {
+        LazyColumn {
+            items(moves, key = { it.id }) { move ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(move.name)
+                    Button(onClick = {
+                        selectedMove.value = move
+                    }) {
+                        Text("Delete")
+                    }
                 }
             }
         }
+
+        AddButton(
+            onClick = {onAddClick()},
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp)
+        )
     }
 
     val moveToDelete = selectedMove.value
