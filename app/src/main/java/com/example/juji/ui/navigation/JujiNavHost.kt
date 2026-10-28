@@ -1,12 +1,11 @@
 package com.example.juji.ui.navigation
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.juji.ui.form.MoveForm
+import com.example.juji.ui.form.AddMoveScreen
 import com.example.juji.ui.list.MoveListScreen
 
 @Composable
@@ -22,7 +21,7 @@ fun JujiNavHost(modifier: Modifier = Modifier) {
             MoveListScreen(onAddClick = {navController.navigate(AddMoveRoute)})
         }
         composable<AddMoveRoute> {
-            MoveForm()
+            AddMoveScreen({navController.popBackStack()})
         }
     }
 }
