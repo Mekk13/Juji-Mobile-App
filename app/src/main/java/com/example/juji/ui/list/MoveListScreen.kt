@@ -71,18 +71,7 @@ fun ConfirmDeleteDialog(
 }
 
 @Composable
-fun AddButton(onClick: () -> Unit, modifier: Modifier = Modifier){
-    FloatingActionButton(
-        onClick = onClick,
-        shape = CircleShape,
-        modifier = modifier
-    ) {
-        Icon(Icons.Filled.Add, "Floating add button")
-    }
-}
-
-@Composable
-fun MoveListScreen(viewModel: MoveListViewModel = viewModel(), onAddClick: () -> Unit, modifier: Modifier = Modifier){
+fun MoveListScreen(viewModel: MoveListViewModel = viewModel(), onAddClick: () -> Unit, onEditClick: (Int) -> Unit, modifier: Modifier = Modifier){
     val moves by viewModel.moves.collectAsStateWithLifecycle()
 
     val selectedMove = remember { mutableStateOf<Move?>(null) }
@@ -95,20 +84,31 @@ fun MoveListScreen(viewModel: MoveListViewModel = viewModel(), onAddClick: () ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(move.name)
                     Button(onClick = {
-                        selectedMove.value = move
-                    }) {
+                        selectedMove.value = move }) {
                         Text("Delete")
+                    }
+
+                    Button(onClick = {
+                        onEditClick(move.id)
+                    }){
+                        Text("Edit")
                     }
                 }
             }
+
+
         }
 
-        AddButton(
+        FloatingActionButton(
             onClick = {onAddClick()},
+            shape = CircleShape,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp)
-        )
+        ) {
+            Icon(Icons.Filled.Add, "Floating add button")
+        }
+
     }
 
     val moveToDelete = selectedMove.value

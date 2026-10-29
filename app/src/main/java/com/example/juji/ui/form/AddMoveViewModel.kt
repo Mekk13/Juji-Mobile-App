@@ -38,11 +38,11 @@ class AddMoveViewModel : ViewModel(){
 
         val times = form.timesPracticed.toIntOrNull()
         val timesPracticedError =
-            if (form.attempted && (times == null || times < 1)) "Enter a whole number, at least 1" else null
+            if (form.attempted && form.timesPracticed.isNotBlank() && (times == null || times < 1)) "Enter a whole number, at least 1" else null
 
         val proficiency = form.proficiency.toIntOrNull()
         val proficiencyError =
-            if (form.attempted && (proficiency == null || proficiency !in 1..10)) "Enter a whole number from 1 to 10" else null
+            if (form.attempted && form.proficiency.isNotBlank() && (proficiency == null || proficiency !in 1..10)) "Enter a whole number from 1 to 10" else null
 
         val lastAttempt = form.lastAttempt
         val lastAttemptError =

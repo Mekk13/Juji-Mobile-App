@@ -7,3 +7,9 @@ object MoveListRoute
 
 @Serializable
 object AddMoveRoute
+
+@Serializable
+data class EditMoveRoute(val id: Int)
+
+
+
