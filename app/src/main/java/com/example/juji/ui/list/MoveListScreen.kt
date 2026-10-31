@@ -67,6 +67,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.juji.model.Move
+import com.example.juji.ui.components.JujiButton
 import com.example.juji.ui.theme.DarkGreen
 import com.example.juji.ui.theme.DarkRed
 import com.example.juji.ui.theme.GreyGreen
@@ -166,32 +167,18 @@ fun MoveCard(move: Move, onEditClick: () -> Unit, onDeleteClick: () -> Unit, mod
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    OutlinedButton(
+                    JujiButton(
                         onClick = {onEditClick()},
-                        shape = RoundedCornerShape(6.dp),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            containerColor = LimeGreen,
-                            contentColor = DarkGreen
-                        ),
-                        border = BorderStroke(1.dp, MossGreen),
-                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
-                        modifier = Modifier.height(28.dp)
-                    ){
-                        Text("Edit", style = MaterialTheme.typography.labelLarge)
-                    }
-                    OutlinedButton(
+                        text = "Edit",
+                        containerColor = LimeGreen,
+                        contentColor = DarkGreen,
+                        borderColor = MossGreen)
+                    JujiButton(
                         onClick = {onDeleteClick()},
-                        shape = RoundedCornerShape(6.dp),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            containerColor = Salmon,
-                            contentColor = DarkRed
-                        ),
-                        border = BorderStroke(1.dp, DarkRed),
-                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
-                        modifier = Modifier.height(28.dp)
-                    ){
-                        Text("Delete", style = MaterialTheme.typography.labelLarge)
-                    }
+                        text = "Delete",
+                        containerColor = Salmon,
+                        contentColor = DarkRed,
+                        borderColor = DarkRed)
                 }
             }
         }
