@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import com.example.juji.ui.form.AddMoveScreen
 import com.example.juji.ui.form.EditMoveScreen
 import com.example.juji.ui.list.MoveListScreen
@@ -26,12 +25,13 @@ fun JujiNavHost(modifier: Modifier = Modifier) {
                     navController.navigate(EditMoveRoute(id))
                 })
         }
+
         composable<AddMoveRoute> {
-            AddMoveScreen({navController.popBackStack()})
+            AddMoveScreen({navController.popBackStack()},onCancel = { navController.popBackStack() })
         }
 
         composable<EditMoveRoute>{
-            EditMoveScreen(onSaved = {navController.popBackStack()})
+            EditMoveScreen(onSaved = {navController.popBackStack()}, onCancel = {navController.popBackStack()})
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.juji.ui.form
 
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,7 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
-fun AddMoveScreen(onSaved: ()->Unit, viewModel: AddMoveViewModel = viewModel()) {
+fun AddMoveScreen(onSaved: ()->Unit,onCancel: () -> Unit, viewModel: AddMoveViewModel = viewModel()) {
 
     Column {
         Text("Add move", style = MaterialTheme.typography.headlineMedium)
@@ -23,14 +24,19 @@ fun AddMoveScreen(onSaved: ()->Unit, viewModel: AddMoveViewModel = viewModel()) 
             onLastAttemptPicked = {viewModel.updateLastAttempt(it)}
         )
 
-        Button(
-            onClick = {
-                if (viewModel.saveMove()) {
-                    onSaved()
-                }
+        Row {
+            Button(onClick = {onCancel()}){
+                Text("Cancel")
             }
-        ) {
-            Text("Save")
+            Button(
+                onClick = {
+                    if (viewModel.saveMove()) {
+                        onSaved()
+                    }
+                }
+            ) {
+                Text("Save")
+            }
         }
     }
 

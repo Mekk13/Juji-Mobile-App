@@ -1,34 +1,31 @@
 package com.example.juji.ui.theme
 
 import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+import com.example.juji.R
 
-// Set of Material typography styles to start with
+val Bitcount = FontFamily(
+    Font(R.font.bitcount_double_regular)
+)
+
+val CourierPrime = FontFamily(
+    Font(R.font.courier_prime_regular, FontWeight.Normal),
+    Font(R.font.courier_prime_bold, FontWeight.Bold)
+)
+
+private val default = Typography()
+
 val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
+    headlineLarge = default.headlineLarge.copy(fontFamily = Bitcount),
+    headlineMedium = default.headlineMedium.copy(fontFamily = Bitcount),
+    headlineSmall = default.headlineMedium.copy(fontFamily = Bitcount),
+    titleLarge = default.titleLarge.copy(fontFamily = Bitcount),
+    titleMedium = default.titleMedium.copy(fontFamily = Bitcount),
+    labelLarge = default.labelLarge.copy(fontFamily = Bitcount),
+    labelMedium = default.labelMedium.copy(fontFamily = Bitcount),
+    bodyLarge = default.bodyLarge.copy(fontFamily = CourierPrime),
+    bodyMedium = default.bodyMedium.copy(fontFamily = CourierPrime),
+    bodySmall = default.bodySmall.copy(fontFamily = CourierPrime)
 )
