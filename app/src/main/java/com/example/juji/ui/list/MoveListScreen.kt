@@ -186,12 +186,11 @@ fun MoveCard(move: Move, onEditClick: () -> Unit, onDeleteClick: () -> Unit, mod
 }
 
 @Composable
-fun KindOfSearchBar(modifier : Modifier = Modifier){
-    var query by remember {mutableStateOf("")}
+fun KindOfSearchBar( query: String, onSearchChange: (String) -> Unit, modifier : Modifier = Modifier){
 
     BasicTextField(
         value = query,
-        onValueChange = { query = it },
+        onValueChange = onSearchChange,
         singleLine = true,
         textStyle = MaterialTheme.typography.bodyMedium.copy(color = DarkGreen),
         modifier = modifier
@@ -220,6 +219,7 @@ fun MoveListScreen(viewModel: MoveListViewModel = viewModel(),
                    modifier: Modifier = Modifier){
 
     val moves by viewModel.moves.collectAsStateWithLifecycle()
+    val query by viewModel.query.collectAsStateWithLifecycle()
     val selectedMove = remember { mutableStateOf<Move?>(null) }
 
     Box (
@@ -235,7 +235,7 @@ fun MoveListScreen(viewModel: MoveListViewModel = viewModel(),
 
 
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)){
-                KindOfSearchBar(modifier = Modifier.weight(1f))
+                KindOfSearchBar(query,{viewModel.updateQuery(it)},modifier = Modifier.weight(1f))
                 ElevatedButton(
                     onClick = {},
                     colors = ButtonDefaults.elevatedButtonColors(
