@@ -1,9 +1,14 @@
 package com.example.juji.model
 
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
 import java.time.LocalDate
 
+@Entity
 data class Move(
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0 ,
+
     val name: String,
     val category: String,
     val startingPosition: String? = null,

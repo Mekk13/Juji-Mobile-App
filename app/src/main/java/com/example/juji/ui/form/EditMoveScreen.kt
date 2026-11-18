@@ -1,6 +1,5 @@
 package com.example.juji.ui.form
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 
