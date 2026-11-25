@@ -103,6 +103,7 @@ fun MoveForm(
     saveText: String,
     onSave: () -> Unit,
     onCancel: () -> Unit,
+    saveError: String?,
 ) {
 
     var showDatePicker by remember { mutableStateOf(false) }
@@ -216,6 +217,9 @@ fun MoveForm(
                             modifier = Modifier.padding(14.dp)
                         )
                     }
+                }
+                if (saveError!= null) {
+                    Text(saveError, color = DarkRed)
                 }
 
                 Spacer(modifier = Modifier.padding(5.dp))

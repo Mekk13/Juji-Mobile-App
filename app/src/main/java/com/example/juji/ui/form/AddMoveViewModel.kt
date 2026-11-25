@@ -20,6 +20,12 @@ class AddMoveViewModel : ViewModel(){
     var form by mutableStateOf(MoveFormState())
         private set
 
+    var saveError by mutableStateOf<String?>(null)
+        private set
+
+    var saved by mutableStateOf(false)
+        private set
+
     fun updateForm(newForm: MoveFormState){
         form = newForm
     }
@@ -76,6 +82,8 @@ class AddMoveViewModel : ViewModel(){
 
         viewModelScope.launch{
             repo.addMove(move)
+                .onSuccess { saveError = null; saved = true }
+                .onFailure { saveError = "Could not add move" }
         }
         return true
     }

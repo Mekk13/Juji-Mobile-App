@@ -221,6 +221,7 @@ fun MoveListScreen(viewModel: MoveListViewModel = viewModel(),
     val moves by viewModel.moves.collectAsStateWithLifecycle()
     val query by viewModel.query.collectAsStateWithLifecycle()
     val selectedMove = remember { mutableStateOf<Move?>(null) }
+    val loadError by viewModel.loadError.collectAsStateWithLifecycle()
 
     Box (
         modifier = modifier.fillMaxSize()
@@ -248,6 +249,7 @@ fun MoveListScreen(viewModel: MoveListViewModel = viewModel(),
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
+            viewModel.deleteError?.let { Text(it, color = DarkRed) }
             Card(
                 modifier = Modifier
                     .weight(1f)
@@ -258,18 +260,23 @@ fun MoveListScreen(viewModel: MoveListViewModel = viewModel(),
                 ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    items(moves, key = { it.id }) { move ->
-                        MoveCard(
-                            move = move,
-                            onEditClick = { onEditClick(move.id) },
-                            onDeleteClick = { selectedMove.value = move }
-                        )
-                    }
+                if (loadError != null){
+                    Text(loadError!!, color = DarkRed)
+                }
+                else {
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+                        items(moves, key = { it.id }) { move ->
+                            MoveCard(
+                                move = move,
+                                onEditClick = { onEditClick(move.id) },
+                                onDeleteClick = { selectedMove.value = move }
+                            )
+                        }
 
+                    }
                 }
             }
         }

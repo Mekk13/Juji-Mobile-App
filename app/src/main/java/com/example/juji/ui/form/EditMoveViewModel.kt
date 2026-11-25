@@ -25,6 +25,12 @@ class EditMoveViewModel(savedStateHandle: SavedStateHandle): ViewModel(){
 
     val move: Move? = repo.getMoveById(id)
 
+    var saveError by mutableStateOf<String?>(null)
+        private set
+
+    var saved by mutableStateOf(false)
+        private set
+
     private fun toFormState(move: Move?): MoveFormState{
         if (move == null) return MoveFormState()
 
@@ -95,6 +101,8 @@ class EditMoveViewModel(savedStateHandle: SavedStateHandle): ViewModel(){
 
         viewModelScope.launch {
             repo.updateMove(id,move)
+                .onSuccess { saveError = null; saved = true }
+                .onFailure { saveError = "Could not update move" }
         }
         return true
     }
