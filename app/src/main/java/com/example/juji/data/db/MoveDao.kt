@@ -19,7 +19,7 @@ interface MoveDao {
     @Update
     suspend fun updateMove(newMove: Move)
 
-    @Query("DELETE FROM Move m WHERE m.id = :id ")
+    @Query("DELETE FROM Move WHERE id = :id ")
     suspend fun deleteMove(id: Int)
 
 }

@@ -5,11 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.juji.data.MoveRepository
 import com.example.juji.model.Move
 import com.example.juji.model.MoveFormState
 import com.example.juji.ui.navigation.EditMoveRoute
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -91,7 +93,9 @@ class EditMoveViewModel(savedStateHandle: SavedStateHandle): ViewModel(){
             proficiency = if (form.attempted) form.proficiency.toIntOrNull() else null
         )
 
-        repo.updateMove(id,move)
+        viewModelScope.launch {
+            repo.updateMove(id,move)
+        }
         return true
     }
 

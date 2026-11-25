@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.WhileSubscribed
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class MoveListViewModel : ViewModel() {
     private val repo = MoveRepository
@@ -32,6 +33,9 @@ class MoveListViewModel : ViewModel() {
 
 
     fun deleteMove(id: Int){
-        repo.deleteMove(id)
+        viewModelScope.launch {
+            repo.deleteMove(id)
+        }
+
     }
 }
